@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - "10"
+addons: code_climate
+env:
+  global:
+    - CC_TEST_REPORTER_ID=3f42ba313a3808404c183b3f99699144011b7ad814553631c752bc2d5ba8ccf1
+cache:
+  directories:
+    - node_modules
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+script:
+  - yarn test --detectOpenHandles -u
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
