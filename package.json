@@ -32,7 +32,9 @@
   },
   "jest": {
     "verbose": true,
-    "setupFilesAfterEnv": ["<rootDir>/src/__tests__/setup.js"],
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/__tests__/setup.js"
+    ],
     "testPathIgnorePatterns": [
       "<rootDir>/src/__tests__/"
     ],
