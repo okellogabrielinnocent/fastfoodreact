@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react'
 import Home from '../components/HomeComponent';
 
-function HomeView() {
+class HomeView extends Component {
+  render() {
     return (
-        <div>
-            <Home />
-        </div>
-    );
+      <div>
+        <Home />
+      </div>
+    )
+  }
 }
-
 export default HomeView;

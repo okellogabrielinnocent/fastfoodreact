@@ -1,5 +1,4 @@
 const express = require('express');
-const yields = require('express-yields');
 const fs = require('fs-extra');
 const webpack = require('webpack');
 

@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import 'msg-notify/dist/notify.css';
 import notify from 'msg-notify';
 import PropTypes from 'prop-types';
+import Register from '../components/RegisterComponent';
 import { postDataThunkPublic } from '../redux/thunks';
 import userSignUp from '../redux/actions/AuthActions';
-import Login from '../components/LoginComponent';
 
-export class LoginView extends Component {
+export class RegisterView extends Component {
     state = {
         username: '',
+        email: '',
+        address: '',
         password: '',
         error: '',
         success: '',
@@ -17,14 +20,11 @@ export class LoginView extends Component {
     componentWillReceiveProps(nextProps) {
         const { error: { message }, successMessage } = nextProps;
         const { history } = this.props;
-        const { email } = this.state;
 
         if (successMessage && message === undefined) {
-            localStorage.setItem('Token', successMessage.access_token);
-            const error = successMessage.message;
-            notify(error, 'success');
-            (email === 'okellogabrielinnocent@gmail.com') ? history.push('/admin') : history.push('/home');
-            window.location.reload();
+            const success = successMessage.message;
+            notify(success, 'success');
+            history.push('/login');
             this.setState({
                 success: successMessage,
             });
@@ -35,30 +35,34 @@ export class LoginView extends Component {
             });
         }
     }
-
     handleChange = (event) => {
         event.preventDefault();
-        this.setState({ [event.target.name]: event.target.value })
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value,
+        });
     }
-
     handleSubmit = (event) => {
         event.preventDefault();
         const { postDataThunkPublic } = this.props;
         const userData = {
             email: this.state.email,
+            address: this.state.address,
+            username: this.state.username,
             password: this.state.password
         }
-        postDataThunkPublic('login', userData, userSignUp, 'post');
-        notify(`${this.props.successMessage.Message}`)
+        postDataThunkPublic('user/signup', userData, userSignUp, 'post');
     }
 
     render() {
         return (
-            <Login
+            <Register
                 onSubmit={this.handleSubmit}
                 onChange={this.handleChange}
                 email={this.state.email}
                 password={this.state.password}
+                address={this.state.address}
+                username={this.state.username}
             />
         );
     }
@@ -76,11 +80,11 @@ const actionCreator = {
     postDataThunkPublic,
 };
 
-LoginView.propTypes = {
+RegisterView.propTypes = {
     message: PropTypes.string,
     successMessage: PropTypes.object,
     history: PropTypes.object,
     postDataThunkPublic: PropTypes.func,
 };
 
-export default connect(mapStateToProps, actionCreator)(LoginView);
+export default connect(mapStateToProps, actionCreator)(RegisterView);
