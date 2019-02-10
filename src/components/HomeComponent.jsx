@@ -1,12 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
+import NavBar from './TopNav'
+const Home = (props) => {
+    const {
+        onLoad
+    } = props;
 
-class Home extends Component {
-    render() {
-        return (
-            <div>
-                <h1>Welcome to Fast Food Fast</h1>
+
+    return (
+        <div onLoad={onLoad}>
+            <NavBar />
+            <div className="main">
+                <div className='item-grid-container'>
+                    <div className='item-grid'>
+                        <div className='item-grid-item first-item'>
+                            <div className="card" id="avialable_menu">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        );
-    }
+        </div>
+    );
+
 }
 export default Home;
