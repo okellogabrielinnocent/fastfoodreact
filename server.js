@@ -4,7 +4,7 @@ const fs = require('fs-extra');
 const webpack = require('webpack');
 
 
-const config = require('../webpack.config.js');
+const config = require('./webpack.config.js');
 
 const compiler = webpack(config);
 const port = process.env.PORT || 3000;
