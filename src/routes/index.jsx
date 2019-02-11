@@ -12,7 +12,7 @@ class Routes extends Component {
             <Provider store={store}>
                 <BrowserRouter>
                     <Switch>
-                        <Route path="/Login" component={LoginView} exact />
+                        <Route path="/login" component={LoginView} exact />
                         <Route path="/register" component={RegisterView} />
                     </Switch>
                 </BrowserRouter>
