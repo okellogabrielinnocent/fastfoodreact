@@ -5,4 +5,4 @@ const getMenu = menu => ({
     menu,
 });
 
-export { addMenuItem, getMenu };
+export default getMenu;

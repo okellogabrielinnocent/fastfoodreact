@@ -20,7 +20,7 @@ export class LoginView extends Component {
         const { email } = this.state;
 
         if (successMessage && message === undefined) {
-            localStorage.setItem('Token', successMessage.access_token);
+            localStorage.setItem('Token', successMessage.Token);
             const error = successMessage.message;
             notify(error, 'success');
             (email === 'okellogabrielinnocent@gmail.com') ? history.push('/admin') : history.push('/home');
@@ -48,7 +48,7 @@ export class LoginView extends Component {
             email: this.state.email,
             password: this.state.password
         }
-        postDataThunkPublic('login', userData, userSignUp, 'post');
+        postDataThunkPublic('auth/login', userData, userSignUp, 'post');
         notify(`${this.props.successMessage.Message}`)
     }
 

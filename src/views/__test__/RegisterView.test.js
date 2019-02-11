@@ -61,7 +61,7 @@ describe('signup view', () => {
     it('should handle change event on inputs', () => {
         const onChange = jest.fn();
         wrapper = mount(<RegisterView {...props} onChange={onChange} />);
-        const event = 'kabanga';
+        const event = 'sdxcfgvbhjnsrdty';
         wrapper.find('#username').simulate('change', event);
         expect(wrapper.find('#username')).toBeDefined();
     });
