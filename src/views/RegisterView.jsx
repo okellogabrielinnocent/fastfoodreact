@@ -51,7 +51,7 @@ export class RegisterView extends Component {
             username: this.state.username,
             password: this.state.password
         }
-        postDataThunkPublic('user/signup', userData, userSignUp, 'post');
+        postDataThunkPublic('auth/user/signup', userData, userSignUp, 'post');
     }
 
     render() {

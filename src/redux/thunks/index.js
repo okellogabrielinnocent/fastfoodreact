@@ -2,7 +2,7 @@ import axios from 'axios';
 import errorOccured from '../actions/commonActions';
 
 const axiosInstance = axios.create({
-    baseURL: 'https://foodiefast.herokuapp.com/API/v1/auth/',
+    baseURL: 'https://foodiefast.herokuapp.com/API/v1/',
 });
 
 axiosInstance.interceptors.response.use(
@@ -26,6 +26,17 @@ const getDataThunkPublic = (endpoint, actionCreator) => (dispatch) => {
     });
 };
 
+const getDataThunkPrivate = (endpoint, actionCreator) => (dispatch) => {
+    const token = localStorage.getItem('Token');
+    axiosInstance.defaults.headers.common.Authorization = 'Bearer '.concat(token);
+    return axiosInstance.get(endpoint).then((response) => {
+        dispatch(actionCreator(response.data));
+    }).catch((err) => {
+        dispatch(errorOccured(err));
+    });
+};
+
+
 const postDataThunkPrivate = (endpoint, data, actionCreator, method) => (dispatch) => {
     const token = localStorage.getItem('Token');
 
@@ -38,5 +49,5 @@ const postDataThunkPrivate = (endpoint, data, actionCreator, method) => (dispatc
 };
 
 export {
-    postDataThunkPublic, postDataThunkPrivate, axiosInstance, getDataThunkPublic,
+    postDataThunkPublic, postDataThunkPrivate, axiosInstance, getDataThunkPublic,getDataThunkPrivate,
 };
